@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}New Tour{% endblock %}
+
+{% block content %}
+
+<h1>New Tour</h1>
+<p>Welcome to our amazing tour site! Please fill out the form below to add a new
+tour to our collection.</p>
+<p>If you need to create a new route click <a href="/bikeroutes/new" target="_blank" rel="noopener noreferrer">here!</a></p>
+<p>If you need to create a new booking click <a href="/bookings/new" target="_blank" rel="noopener noreferrer">here!</a></p>
+<div class="form-container">
+    <form action="" method="post">
+        {% csrf_token %}    
+        {{ form.as_p }} 
+        <input type="submit" value="Submit">
+    </form>
+</div>
+{% endblock %}

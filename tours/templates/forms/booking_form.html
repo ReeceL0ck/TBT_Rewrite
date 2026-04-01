@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}New Booking{% endblock %}
+
+{% block content %}
+
+<h1>New Booking</h1>
+<p>Welcome to our amazing tour site! Please fill out the form below to add a new
+Booking to our collection.</p>
+<form action="" method="post">
+    {% csrf_token %}
+    {{ form.as_p }} 
+    <input type="submit" value="Submit">
+</form>
+{% endblock %}

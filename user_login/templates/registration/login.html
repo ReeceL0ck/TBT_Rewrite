@@ -1,0 +1,22 @@
+ {% load static %}    
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" type="text/css" href="{% static './style.css' %}">
+</head>
+<body style="justify-content: center; align-items: center; display: flex;"></body>
+<div >
+<h1>Log In</h1>
+<form class="auth-form" method="post">
+  {% csrf_token %}
+  {{ form }}
+  <button style="margin-top: 20px;" class="form-submit" type="submit">Log In</button>
+  <button class="signup" type="submit">
+    
+  </button>
+</form>
+<p style="text-align: center;">Don't have an account? <a    class="signup" href="{% url 'signup' %}">Signup</a></p>
+</div>
+</body>
