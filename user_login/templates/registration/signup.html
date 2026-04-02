@@ -1,14 +1,8 @@
-{% load static %}    
+{% extends 'base.html' %} 
+{% load static %}   
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" type="text/css" href="{% static './style.css' %}">
-</head>
- <div>
-<body style="justify-content: center; align-items: center; display: flex;">
+{% block content %}
+<div style="justify-content: center; align-items: center; display: flex; flex-direction: column;">
 <h1>Create an account</h1>
 <form class="auth-form" method="post">
   {% csrf_token %}
@@ -18,3 +12,4 @@
 <p style="text-align: center;">Already have an account? <a    class="signup" href="{% url 'login' %}">Login</a></p>
 </div>
 </body>
+{% endblock %}
