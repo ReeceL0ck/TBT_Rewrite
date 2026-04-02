@@ -13,7 +13,7 @@ Booking to our collection.</p>
         {% csrf_token %}    
         {{ form.as_p }} 
         <input type="submit" value="Submit">
-        <a href="http://stackoverflow.com"> Cancel </a>
+        <a class="cancel" href="/tours"> Cancel </a>
     </form>
 </div>
 {% endblock %}
