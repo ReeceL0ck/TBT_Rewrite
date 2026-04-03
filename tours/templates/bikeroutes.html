@@ -3,15 +3,18 @@
 {% block title %}Welcome to Tour Twats{% endblock %}
 
 {% block content %}
-<h1>Welcome to Tour Twats</h1>
 <h2>Bike Routes</h2> <a href="/bikeroutes/new">Add Route</a>
-<p>Welcome to our tour site</p>
-<h2>Bike Routes</h2>
-<ul>
-    {% for route in bikeroutes %}
-        <li>{{ route.route_name }} — {{ route.route_distance }} - <a href="{{ route.route_link }}" target="_blank">View Route</a></li>
-    {% empty %}
-        <li>No routes added yet.</li>
-    {% endfor %}
+
+<div class="section-grid">
+{% for route in bikeroutes %}
+<ul class="section-container" style="max-width: 340px; overflow: auto;">
+  <h2 class="section-title">{{ route.route_name }}</h2>
+  <h2 class="section-heading">Maybe something here idk</h2>
+  <p class="section-date">Distance: {{ route.route_distance }}</p>
+  <p class="section-date">Link: <a href="{{ route.route_link }}" target="_blank">View Route</a></p>
+
 </ul>
+{% empty %}
+  <p>No Routes Found</p>
+{% endfor %}
 {% endblock %}

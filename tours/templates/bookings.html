@@ -3,20 +3,20 @@
 {% block title %}Welcome to Tour Twats{% endblock %}
 
 {% block content %}
-<h1>Welcome to Tour Twats</h1>
-<h2>Bookings Made </h2>  <a href="/bookings/new">Add Booking</a>
+<h2>Bookings Made </h2>  
+<a href="/bookings/new">Add Booking</a>
 
-    {% if user.is_authenticated %}
-        <p>Welcome {{user.username}} to our amazing tour site!</p>
-    {% else %}
-        <p>Welcome to our amazing tour site!</p>
-    {%endif%}
-<h2>Booking Details</h2>
-<ul>
-    {% for booking in bookings %}
-        <li>{{ booking.booking_name }} — £{{ booking.booking_cost }} on {{ booking.booking_date }}</li>
-    {% empty %}
-        <li>No bookings added yet.</li>
-    {% endfor %}
+<div class="section-grid">
+{% for booking in bookings %}
+<ul class="section-container" style="max-width: 340px; overflow: auto;">
+  <h2 class="section-title">{{ booking.booking_name }}</h2>
+  <h2 class="section-heading">City, Country</h2>
+  <p class="section-date">Date: {{ booking.booking_date }} </p>
+  <p class="section-date">Cost: £{{ booking.booking_cost }} Per Night</p>
+
 </ul>
+{% empty %}
+  <p>No Bookings Found</p>
+{% endfor %}
+</div>
 {% endblock %}
