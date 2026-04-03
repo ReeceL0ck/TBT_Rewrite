@@ -206,7 +206,7 @@ h1 {
     text-align: center;
 }
 
-.tour-container {
+.section-container {
   border: 1px solid #d1d5db;
   border-radius: 12px;
   padding: 1.5rem;
@@ -215,20 +215,21 @@ h1 {
   list-style: none;
 }
 
-.tour-container h2.tour-title {
+
+.section-container h2.tour-title {
   font-size: 20px;
   font-weight: 500;
   color: #111827;
   margin: 0 0 4px 0;
 }
 
-.tour-container p.tour-date {
+.section-container p.tour-date {
   font-size: 13px;
   color: #6b7280;
   margin: 0 0 1.25rem 0;
 }
 
-.tour-container h2.section-heading {
+.section-container h2.section-heading {
   font-size: 11px;
   font-weight: 500;
   letter-spacing: 0.1em;
@@ -239,33 +240,47 @@ h1 {
   margin: 0 0 10px 0;
 }
 
-.tour-container ul {
+.section-container ul {
   list-style: none;
   padding: 0;
   margin: 0 0 1.25rem 0;
 }
 
-.tour-container ul li {
+.section-container ul li {
   font-size: 14px;
   color: #111827;
   padding: 6px 0;
   border-bottom: 0.5px solid #f3f4f6;
 }
 
-.tour-container ul li:last-child {
+.section-container ul li:last-child {
   border-bottom: none;
 }
 
-.tour-container ul li a {
+.section-container ul li a {
   color: #2563eb;
   text-decoration: none;
   font-size: 13px;
 }
 
-.tour-container ul li a:hover {
+.section-container ul li a:hover {
   text-decoration: underline;
 }
 
+.section-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.section-grid .section-container {
+  flex: 0 0 calc(33.333% - 1rem);
+  margin-bottom: 0;
+  box-sizing: border-box;
+}
 
 
 .form-container form {
