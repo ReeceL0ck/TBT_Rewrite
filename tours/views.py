@@ -146,4 +146,4 @@ def new_photo(request):
             return redirect('gallery')
     else:
         form = GalleryForm()
-    return render(request, 'upload.html', {'form': form})
+    return render(request, 'forms/gallery_form.html', {'form': form})

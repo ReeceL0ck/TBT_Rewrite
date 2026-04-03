@@ -35,6 +35,6 @@ class Tour(models.Model):
     def __str__(self):
         return self.tour_name
 
-# class Gallery(models.Model):
-#     image_description = models.CharField(max_length=255)
-#     photo = models.ImageField(upload_to="images")
+class Gallery(models.Model):
+    image_description = models.CharField(max_length=255)
+    photo = models.ImageField(upload_to="images")
