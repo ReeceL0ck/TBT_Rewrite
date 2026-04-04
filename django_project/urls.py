@@ -2,6 +2,8 @@
 from django.contrib import admin
 from django.urls import path, include
 from tours import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 admin.site.site_header = "TBT Admin"
 admin.site.site_title = "TBT Admin Portal"
@@ -20,4 +22,4 @@ urlpatterns = [
     path('bikeroutes/new',views.new_route, name='add_route'),
     path('bookings/new',views.new_booking, name='add_booking'),
     path('gallery/new',views.new_photo, name='add_photo'),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
