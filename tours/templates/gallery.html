@@ -3,8 +3,16 @@
 {% block title %}Welcome to Tour Twats{% endblock %}
 
 {% block content %}
-<h1>Welcome to Tour Twats</h1>
-<h2>Gallery</h2>
-<p>Welcome to our amazing tour site!
-</p>
+<h2>Gallery</h2> <a href="/gallery/new">Add Photo</a>
+
+<div class="section-grid">
+{% for photo in photos %}
+<ul class="section-container" style="max-width: 340px; overflow: auto;">
+  <img src="{{ photo.photo.url }}" alt="No Image Available" style="max-width: 100%; height: auto;">
+  <h2 class="section-heading">Description</h2>
+  <p class="section-date">{{ photo.image_description }} </p>
+</ul>
+{% empty %}
+  <p>No images Found</p>
+{% endfor %}
 {% endblock %}
