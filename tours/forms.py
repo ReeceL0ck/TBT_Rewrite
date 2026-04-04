@@ -1,11 +1,11 @@
-from tours.models import Tour, Booking, BikeRoute
+from tours.models import Tour, Booking, BikeRoute, Gallery
 from datetime import date
 from django import forms
 
-class GalleryForm(forms.Form):
-    image = forms.ImageField()
-    description = forms.CharField(max_length=255)
-    date_taken = forms.DateField(initial=date.today)
+class GalleryForm(forms.ModelForm):
+    class Meta:
+        model = Gallery
+        fields = ['photo','image_description']
 
 
 class BikeRouteForm(forms.ModelForm):

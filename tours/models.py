@@ -1,6 +1,9 @@
 from email.policy import default
 from django.db import models
 from django.contrib.auth.models import User
+from django.core.files.storage import FileSystemStorage
+
+fs = FileSystemStorage(location="./media")
 
 # Create your models here.
 """
@@ -37,4 +40,5 @@ class Tour(models.Model):
 
 class Gallery(models.Model):
     image_description = models.CharField(max_length=255)
-    photo = models.ImageField(upload_to="images")
+    photo = models.ImageField(upload_to="images",storage=fs)
+    user         = models.ForeignKey(User, on_delete=models.CASCADE, default=1) 

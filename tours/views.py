@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_list_or_404, get_object_or_404, redirect
 from django.http import HttpResponseRedirect
-from .models import BikeRoute, Booking, Tour
+from .models import BikeRoute, Booking, Tour, Gallery
 from .forms import GalleryForm, TourForm, BikeRouteForm, BookingForm
 from django.contrib.auth.decorators import login_required
 from .utils import handle_uploaded_file
@@ -64,7 +64,8 @@ def gallery(request):
     Endpoint: /gallery
     Description: Where the users can store photos
     """
-    return render(request, 'gallery.html')
+    images = Gallery.objects.all()
+    return render(request, 'gallery.html', {'photos':images})
 
 
 """
@@ -142,7 +143,11 @@ def new_photo(request):
     if request.method == 'POST':
         form = GalleryForm(request.POST, request.FILES)
         if form.is_valid():
-            handle_uploaded_file(request.FILES['file'])
+            f = (request.FILES)
+            # print(f.photo.name)
+            form.save()
+            # print(f.read())
+            # handle_uploaded_file(request.FILES['file'])
             return redirect('gallery')
     else:
         form = GalleryForm()
