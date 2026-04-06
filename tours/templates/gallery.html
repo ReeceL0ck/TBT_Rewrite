@@ -6,13 +6,25 @@
 <h2>Gallery</h2> <a href="/gallery/new">Add Photo</a>
 
 <div class="section-grid">
-{% for photo in photos %}
-<ul class="section-container" style="max-width: 340px; overflow: auto;">
-  <img src="{{ photo.photo.url }}" alt="No Image Available" style="max-width: 100%; height: auto;">
-  <h2 class="section-heading">Description</h2>
-  <p class="section-date">{{ photo.image_description }} </p>
-</ul>
-{% empty %}
-  <p>No images Found</p>
-{% endfor %}
-{% endblock %}
+    {% for photo in photos %}
+    <ul class="section-container" id="imageBox1" style="max-width: 340px; overflow: auto;">
+        <!-- <img src="{{ photo.photo.url }}" alt="No Image Available" style="max-width: 100%; height: auto;"> -->
+        <img src="{{ photo.photo.url }}" alt="No Image Available"
+            style="max-width: 100%; height: auto; cursor: pointer;" onclick="openModal(this.src)">
+        <h2 class="section-heading">{{photo.user.first_name}}</h2>
+        <li class="section-date">{{ photo.image_description }} </li>
+
+        <div id="myModal" class="modal" onclick="closeModal()">
+            <div class="modal-content">
+                <div class="modal-image-wrapper">
+                    <span class="close" onclick="closeModal()">&times;</span>
+                    <img src="" id="modal-image" class="modal-image" alt="No Image Available" />
+                </div>
+            </div>
+        </div>
+    </ul>
+    {% empty %}
+    <p>No images Found</p>
+    {% endfor %}
+
+    {% endblock %}

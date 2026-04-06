@@ -1,41 +1,46 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <link rel="stylesheet" href="{% static 'style.css' %}">
-    <link rel="icon" type="image/png" href="{%static 'favicon.ico' %}"/>
+    <link rel="icon" type="image/png" href="{%static 'favicon.ico' %}" />
+    <script src="{% static 'script.js' %}"></script>
 
-    
+
     <title>{% block title %}Tour Twats{% endblock %}</title>
 </head>
 
 <body>
-<nav id="navbar">
-    <ul id="nav-links">
-        <li><a href="/">Home</a></li>
-        <li><a href="/tours">Tours</a></li>
-        <li><a href="/bookings">Booking</a></li>
-        <li><a href="/bikeroutes">Routes</a></li>
-        <li><a href="/gallery">Gallery</a></li>
-    </ul>
-    <ul id="nav-auth">
-        {% if user.is_authenticated %}
+    <nav id="navbar">
+        <ul id="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/tours">Tours</a></li>
+            <li><a href="/bookings">Booking</a></li>
+            <li><a href="/bikeroutes">Routes</a></li>
+            <li><a href="/gallery">Gallery</a></li>
+        </ul>
+        <ul id="nav-auth">
+            {% if user.is_authenticated %}
             <li><a href="/profile">Profile</a></li>
-            <li><form method="post" action="{% url 'logout' %}">
+            <li>
+                <form method="post" action="{% url 'logout' %}">
                     {% csrf_token %}
                     <button class="logout" type="submit">Logout</button>
-                    </form></li>
-        {% else %}
+                </form>
+            </li>
+            {% else %}
             <li><a href="/login">Login</a></li>
-        {% endif %}
-    </ul>
-</nav>
+            {% endif %}
+        </ul>
+    </nav>
 
     <div id="content">
         {% block content %}{% endblock %}
     </div>
 </body>
-<footer style="font-size: xx-small;text-align: center; position: relative;">
+<footer class="footer">
     Made with Django® - By Reece 2026
 </footer>
+
 </html>

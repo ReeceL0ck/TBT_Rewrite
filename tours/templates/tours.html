@@ -14,22 +14,23 @@
   <h2 class="section-heading">Routes</h2>
   <ul>
     {% for route in tour.tour_routes.all %}
-      <li>{{ route.route_name }} — {{ route.route_distance }} - <a href="{{ route.route_link }}" target="_blank">View Route</a></li>
+    <li>{{ route.route_name }} — {{ route.route_distance }} - <a href="{{ route.route_link }}" target="_blank">View
+        Route</a></li>
     {% empty %}
-      <li>No routes added yet.</li>
+    <li>No routes added yet.</li>
     {% endfor %}
   </ul>
 
   <h2 class="section-heading">Bookings</h2>
   <ul>
     {% for booking in tour.tour_bookings.all %}
-      <li>{{ booking.booking_name }} — £{{ booking.booking_cost }} on {{ booking.booking_date }}</li>
+    <li>{{ booking.booking_name }} — £{{ booking.booking_cost }} on {{ booking.booking_date }}</li>
     {% empty %}
-      <li>No bookings yet.</li>
+    <li>No bookings yet.</li>
     {% endfor %}
   </ul>
 </ul>
 {% empty %}
-  <p>No Tours Found</p>
+<p>No Tours Found</p>
 {% endfor %}
 {% endblock %}

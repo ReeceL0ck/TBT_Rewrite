@@ -6,15 +6,18 @@
 <h1>Welcome to Tour Twats</h1>
 <main>
     {% if user.is_authenticated %}
-        <p>Welcome {{user.username}} to our amazing tour site!</p>
+    <p>Welcome {{user.first_name|default_if_none:user.username}} to our amazing tour site!</p>
     {% else %}
-        <p>Welcome to our amazing tour site!</p>
+    <p>Welcome to our amazing tour site!</p>
     {%endif%}
-    <img class="logo-img" fetchpriority="high" src="static/svg/TBT_Logo.jpeg" alt="Tour Twats Logo"  width="400" height="400">
-    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Consectetur placeat quasi ex! Eveniet, ratione! Rem aliquid, adipisci facere quidem totam repellendus architecto, suscipit cupiditate repellat praesentium accusamus cumque earum fuga.</p>
-    <h2>Meet the twats!</h2>
+    <img class="logo-img" fetchpriority="high" src="static/svg/TBT_Logo.jpeg" alt="Tour Twats Logo" width="400"
+        height="400">
+    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Consectetur placeat quasi ex! Eveniet, ratione! Rem
+        aliquid, adipisci facere quidem totam repellendus architecto, suscipit cupiditate repellat praesentium accusamus
+        cumque earum fuga.</p>
+    <h2>Meet the Brothers!</h2>
     <!-- Make this dynamic when the users create an account -->
-    <div class="meet-us"> 
+    <div class="meet-us">
         <ul>
             <li>Richard</li>
             <li>Marc</li>
