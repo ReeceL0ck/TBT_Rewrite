@@ -72,7 +72,14 @@ def gallery(request):
 This section deals with urls for the forms and dynamic pages where users can add data
 """
 
-
+@login_required(login_url='/login/')
+def profile(request):
+    """
+    Endpoint: /profile
+    Description: Where the users can see profile and change data
+    """
+    return render(request,'profile.html')
+    
 @login_required(login_url='/login/')
 def new_tour(request):
     """
