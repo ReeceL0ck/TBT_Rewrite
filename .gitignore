@@ -59,16 +59,6 @@ local_settings.py
 db.sqlite3
 db.sqlite3-journal
 
-# Flask stuff:
-instance/
-.webassets-cache
-
-# Scrapy stuff:
-.scrapy
-
-# Sphinx documentation
-docs/_build/
-
 # PyBuilder
 target/
 
@@ -100,3 +90,6 @@ venv.bak/
 # OS
 .DS_Store
 Thumbs.db
+
+# Image Storage
+media/
