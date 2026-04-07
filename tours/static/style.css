@@ -85,7 +85,21 @@
   background-color: #f3f4f6;
   text-decoration: none;
 }
-/* add logic to appear the login on the right */
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  padding: 2px;
+  height: 20px;
+  background-color: #ffffff;
+  border-top: 1px solid #e5e7eb;
+  z-index: 1000;
+  box-sizing: border-box;
+  font-size: xx-small;
+}
 
 
 body {
@@ -95,6 +109,7 @@ body {
   background-color: #f9fafb;
   /* margin: 0 auto; */
   padding-top: 56px;
+  padding-bottom: 20px;
 }
 
 main {
@@ -397,3 +412,57 @@ h1 {
 .form-container .cancel:hover {
     background: #333;
 }
+
+/* Gallery Modal */
+.section-container .modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 86px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); 
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+}
+
+.section-container .modal-content {
+  margin: auto;
+  text-align: center;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.section-container .modal-image {
+  display: inline-block;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.section-container .modal .close {
+  position: absolute;
+  top: 66px;
+  right: 220px;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+  transition: color 0.3s ease;
+  cursor: pointer;
+}
+
+.section-container .modal .close:hover {
+  position: absolute;
+  top: 66px;
+  right: 220px;
+  color: #333333;
+  font-size: 40px;
+  font-weight: bold;
+  transition: color 0.3s ease;
+  cursor: pointer;
+}
+
