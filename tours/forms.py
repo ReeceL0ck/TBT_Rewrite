@@ -1,3 +1,4 @@
+from sqlite3 import Date
 from tours.models import Tour, Booking, BikeRoute, Gallery
 from datetime import date
 from django import forms
@@ -14,13 +15,24 @@ class BikeRouteForm(forms.ModelForm):
         fields = ['route_name', 'route_distance', 'route_link']
 
 
+class DateInput(forms.DateInput):
+    input_type = "date"
+
+
 class BookingForm(forms.ModelForm):
     class Meta:
         model = Booking
         fields = ['booking_name', 'booking_date', 'booking_cost']
+        widgets = {
+            'booking_date': DateInput(),
+        }
 
 
 class TourForm(forms.ModelForm):
+
     class Meta:
         model = Tour
         fields = ['tour_name', 'tour_date', 'tour_routes', 'tour_bookings']
+        widgets = {
+            'tour_date': DateInput(),
+        }
