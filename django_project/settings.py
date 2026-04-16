@@ -33,6 +33,7 @@ ALLOWED_HOSTS = ['127.0.0.1']
 INSTALLED_APPS = [
     'user_login',
     'tours.apps.ToursConfig',
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -122,3 +123,17 @@ STATIC_URL = 'static/'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
+jazzmin_settings = {
+    "site_title": "TBT Admin Portal",
+    "site_header": "TBT Admin",
+    "site_brand": "TBT Admin Portal",
+    "welcome_sign": "Welcome to the TBT Admin Portal",  
+    "changeform_format": "carousel",
+    "site_logo_classes": "i",
+}
+
+JAZZMIN_UI_TWEAKS = {
+    "theme": "cerulean",
+    "dark_mode_theme": "darkly",
+}
