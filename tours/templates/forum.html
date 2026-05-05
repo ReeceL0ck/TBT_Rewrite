@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}Welcome to Tour Twats{% endblock %}
+
+{% block content %}
+<!-- <h1>Welcome to Tour Twats</h1> -->
+<!--<h2>Message Board</h2>-->
+<div class="form-container">
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Post">
+    </form>
+</div>
+{% for post in posts %}
+<ul class="section-container" style="max-width: 720px; overflow: auto;margin-left: 30%;">
+  <h2 class="section-heading" style="text-align: left; ">{{ post.poster.first_name }}, {{ post.time_posted }} </h2>
+  <p class="section-date">{{ post.post }} </p>
+
+  {% if user.id == post.poster.id %}
+
+
+      <button type="submit">Delete</button>
+
+  {% endif %}
+
+</ul>
+{% empty %}
+  <p>No Posts</p>
+{% endfor %}
+{% endblock %}

@@ -1,5 +1,6 @@
+from ast import For
 from sqlite3 import Date
-from tours.models import Tour, Booking, BikeRoute, Gallery
+from tours.models import Tour, Booking, BikeRoute, Gallery, Forum
 from datetime import date
 from django import forms
 
@@ -29,10 +30,14 @@ class BookingForm(forms.ModelForm):
 
 
 class TourForm(forms.ModelForm):
-
     class Meta:
         model = Tour
         fields = ['tour_name', 'tour_date', 'tour_routes', 'tour_bookings']
         widgets = {
             'tour_date': DateInput(),
         }
+
+class ForumForm(forms.ModelForm):
+    class Meta:
+        model = Forum
+        fields = ['post']

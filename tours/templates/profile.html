@@ -5,7 +5,7 @@
 
 {% block content %}
 
-<h1>Hello {{user.first_name}}</h1>
+<h1>Hello {{user.first_name|default:user }} </h1>
 
 <ul>
     <li><a href="/changepassword">Change Password</a></li>

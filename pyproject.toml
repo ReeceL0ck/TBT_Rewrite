@@ -6,8 +6,11 @@ readme = "README.md"
 requires-python = ">=3.14"
 dependencies = [
     "django>=6.0.3",
+    "django-environ>=0.13.0",
     "django-jazzmin>=3.0.4",
+    "environ>=1.0",
     "pillow>=12.2.0",
+    "python-dotenv>=1.2.2",
 ]
 
 [dependency-groups]

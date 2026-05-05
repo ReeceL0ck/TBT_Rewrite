@@ -1,7 +1,7 @@
-from email.policy import default
-from django.db import models
 from django.contrib.auth.models import User
 from django.core.files.storage import FileSystemStorage
+from django.db import models
+import datetime
 
 fs = FileSystemStorage(location="./media")
 
@@ -59,3 +59,12 @@ class Gallery(models.Model):
 
     def __str__(self):
         return self.image_description
+
+
+class Forum(models.Model):
+    post = models.TextField()
+    poster = models.ForeignKey(User, on_delete=models.CASCADE)
+    time_posted = models.DateField(default=datetime.datetime.now())
+
+    def __str__(self):
+        return self.post

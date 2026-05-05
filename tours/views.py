@@ -1,13 +1,14 @@
+from cmath import log
 from django.shortcuts import render, get_list_or_404, get_object_or_404, redirect
 from django.http import HttpResponseRedirect
-from .models import BikeRoute, Booking, Tour, Gallery
-from .forms import GalleryForm, TourForm, BikeRouteForm, BookingForm
+from .models import BikeRoute, Booking, Tour, Gallery, Forum
+from .forms import ForumForm, GalleryForm, TourForm, BikeRouteForm, BookingForm
 from django.contrib.auth.decorators import login_required
 from .utils import handle_uploaded_file
 
 
 """
-This section deals with the static loaded pages. 
+This section deals with the static loaded pages.
 For general viewing of a page add them here
 """
 
@@ -26,15 +27,12 @@ def tours(request):
     Endpoint: /tours
     Description: Page to view alll of the tours that are saved
     """
-    tours = get_list_or_404(
-        Tour.objects.prefetch_related('tour_routes', 'tour_bookings').all()
-    )
-    
+    tours = Tour.objects.prefetch_related('tour_routes', 'tour_bookings').all()
     context = {
         'tours':tours
     }
 
-    
+
     return render(request, 'tours.html', context)
 
 
@@ -52,7 +50,7 @@ def bookings(request):
 def bikeroutes(request):
     """
     Endpoint: /bikeroutes
-    Description: Page to show all the bike routes saved 
+    Description: Page to show all the bike routes saved
     """
     bikeroutes = BikeRoute.objects.all()
     return render(request, 'bikeroutes.html', {'bikeroutes': bikeroutes})
@@ -79,7 +77,7 @@ def profile(request):
     Description: Where the users can see profile and change data
     """
     return render(request,'profile.html')
-    
+
 @login_required(login_url='/login/')
 def new_tour(request):
     """
@@ -105,7 +103,7 @@ def new_tour(request):
 def new_route(request):
     """
     Endpoint: /bikeroutes/new
-    Description: Where new routes can be added 
+    Description: Where new routes can be added
     """
     if request.method == 'POST':
         form = BikeRouteForm(request.POST)
@@ -125,7 +123,7 @@ def new_route(request):
 def new_booking(request):
     """
     Endpoint: /bookings/new
-    Description: Where new bookings can be added 
+    Description: Where new bookings can be added
     """
     if request.method == 'POST':
         form = BookingForm(request.POST)
@@ -145,7 +143,7 @@ def new_booking(request):
 def new_photo(request):
     """
     Endpoint: /gallery/new
-    Description: Where new photos can be added 
+    Description: Where new photos can be added
     """
     if request.method == 'POST':
         form = GalleryForm(request.POST, request.FILES)
@@ -159,3 +157,40 @@ def new_photo(request):
     else:
         form = GalleryForm()
     return render(request, 'forms/gallery_form.html', {'form': form})
+
+@login_required(login_url='/login/')
+def forum(request):
+    """
+    ENDPOINT: /forum/
+    Description: Message Forum
+    """
+    posts = Forum.objects.all()
+
+
+    if request.method == 'POST':
+        form = ForumForm(request.POST)
+        if form.is_valid():
+            Forum.objects.create(
+                post=form.cleaned_data['post'],
+                poster=request.user
+
+            )
+            return redirect('forum')
+    else:
+        form = ForumForm()
+
+    context = {
+        "posts":posts,
+        "form":form
+     }
+
+    return render(request, 'forum.html', context)
+
+@login_required(login_url='/login/')
+def del_post(request, post_id):
+    post = get_object_or_404(Forum, id=post_id)
+    # Double-check on the server — never trust the template alone
+    if request.user == post.poster:
+        post.delete()
+
+    return redirect('your_posts_view_name')
