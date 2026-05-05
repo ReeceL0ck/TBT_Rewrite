@@ -8,6 +8,6 @@ This is a rewrite of the TBT project writtien with Django and uses UV as the pac
 
 
 # TODO
-Add post deletion for users who want to delete posts
-Add profile picture to users
-Complete profile page
+ - Add post deletion for users who want to delete posts
+ - Add profile picture to users
+ - Complete profile page
