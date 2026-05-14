@@ -194,3 +194,9 @@ def del_post(request, post_id):
         post.delete()
 
     return redirect('your_posts_view_name')
+
+
+@login_required(login_url='/login/')
+def post(request, thread_id):
+    post = get_object_or_404(Forum, id=thread_id)
+    return render(request, 'post.html', {'post': post})

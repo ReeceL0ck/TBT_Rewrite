@@ -19,6 +19,8 @@ urlpatterns = [
     path('gallery/', views.gallery, name='gallery'),
     path('profile/', views.profile, name='profile'),
     path('forum/', views.forum, name='forum'),
+    path('forum/<int:thread_id>/', views.post, name='post'),
+    
 
     path('tours/new',views.new_tour, name='add_tour'),
     path('bikeroutes/new',views.new_route, name='add_route'),
