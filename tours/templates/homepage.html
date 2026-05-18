@@ -3,20 +3,30 @@
 {% block title %}Welcome to Tour Twats{% endblock %}
 
 {% block content %}
+<!--HEADING OF THE HOMEPAGE, -->
 <h1>Welcome to Tour Twats</h1>
+<!--END OF HEADING-->
 <main>
     {% if user.is_authenticated %}
+    <!--START OF WELCOME MESSAGE FOR AUTHENTICATED USERS-->
+    <!--IF YOU STILL WANT A WELCOME MESSAGE FOR AUTHENTICATED USERS, LEAVE {{user.first_name|default_if_none:user.username}} AS THIS IS THE RENDERED TEMPLATE VARIABLE FOR USERNAME-->
     <p>Welcome {{user.first_name|default_if_none:user.username}} to our amazing tour site!</p>
+    <!--END OF WELCOME MESSAGE FOR AUTHENTICATED USERS-->
     {% else %}
+    <!--START OF WELCOME MESSAGE FOR NON-AUTHENTICATED USERS-->
     <p>Welcome to our amazing tour site!</p>
+    <!--END OF WELCOME MESSAGE FOR NON-AUTHENTICATED USERS-->
     {%endif%}
     <img class="logo-img" fetchpriority="high" src="static/svg/TBT_Logo.jpeg" alt="Tour Twats Logo" width="400"
         height="400">
+    <!--THIS IS THE MAIN PARAGRAPH SECTION OF THE HOMEPAGE, ADD WHAT YOU WANT HERE-->
     <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Consectetur placeat quasi ex! Eveniet, ratione! Rem
         aliquid, adipisci facere quidem totam repellendus architecto, suscipit cupiditate repellat praesentium accusamus
         cumque earum fuga.</p>
+    <!--END OF MAIN PARAGRAPH SECTION-->
+
+    <!--ADD A SECTION FOR MEETING THE BROTHERS HERE, CAN BE DELETED IF NOT NEEDED-->
     <h2>Meet the Brothers!</h2>
-    <!-- Make this dynamic when the users create an account -->
     <div class="meet-us">
         <ul>
             <li>Richard</li>

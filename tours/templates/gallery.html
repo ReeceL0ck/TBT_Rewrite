@@ -8,9 +8,19 @@
 <div class="section-grid">
     {% for photo in photos %}
     <ul class="section-container" id="imageBox1" style="max-width: 340px; overflow: auto;">
-        <!-- <img src="{{ photo.photo.url }}" alt="No Image Available" style="max-width: 100%; height: auto;"> -->
-        <img src="{{ photo.photo.url }}" alt="No Image Available"
-            style="max-width: 100%; height: auto; cursor: pointer;" onclick="openModal(this.src)">
+        <div class="photo-wrapper">
+            <!-- image -->
+            <img src="{{ photo.photo.url }}" alt="No Image Available"
+                style="max-width: 100%; height: auto; cursor: pointer;" onclick="openModal(this.src)">
+
+            {% if request.user == photo.user %}
+            <form method="post" action="{% url 'delete_photo' photo.id %}" class="delete-photo-form">
+                {% csrf_token %}
+                <button type="submit" class="delete-photo" title="Delete photo">X</button>
+            </form>
+            {% endif %}
+        </div>
+
         <h2 class="section-heading">{{photo.user.first_name}}</h2>
         <li class="section-date">{{ photo.image_description }} </li>
 

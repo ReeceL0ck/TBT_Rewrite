@@ -17,6 +17,7 @@ urlpatterns = [
     path('bookings/', views.bookings, name='bookings'),
     path('bikeroutes/', views.bikeroutes, name='bikeroutes'),
     path('gallery/', views.gallery, name='gallery'),
+    path('gallery/<int:photo_id>/delete/', views.del_photo, name='delete_photo'),
     path('profile/', views.profile, name='profile'),
     path('forum/', views.forum, name='forum'),
     path('forum/<int:thread_id>/', views.post, name='post'),

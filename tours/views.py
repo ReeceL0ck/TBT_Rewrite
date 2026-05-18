@@ -66,6 +66,19 @@ def gallery(request):
     return render(request, 'gallery.html', {'photos':images})
 
 
+@login_required(login_url='/login/')
+@require_POST
+def del_photo(request, photo_id):
+    """Delete a photo if the requesting user is the owner."""
+    photo = get_object_or_404(Gallery, id=photo_id)
+
+    # Server-side ownership check
+    if request.user == photo.user:
+        photo.delete()
+
+    return redirect('gallery')
+
+
 """
 This section deals with urls for the forms and dynamic pages where users can add data
 """
@@ -164,7 +177,7 @@ def forum(request):
     ENDPOINT: /forum/
     Description: Message Forum
     """
-    posts = Forum.objects.all()
+    posts = Forum.objects.all().order_by('-time_posted')
 
 
     if request.method == 'POST':
@@ -207,7 +220,7 @@ def del_post(request, post_id):
 def post(request, thread_id):
     post = get_object_or_404(Forum, id=thread_id)
     replies = Reply.objects.filter(post=post)
-    
+
     if request.method == 'POST':
         form = ReplyForm(request.POST)
         if form.is_valid():
@@ -219,7 +232,7 @@ def post(request, thread_id):
             return redirect('post', thread_id=thread_id)
     else:
         form = ReplyForm()
-    
+
     context = {
         'post': post,
         'replies': replies,
@@ -232,8 +245,8 @@ def post(request, thread_id):
 def del_reply(request, reply_id):
     reply = get_object_or_404(Reply, id=reply_id)
     thread_id = reply.post.id
-    
+
     if request.user == reply.reply_user:
         reply.delete()
-    
+
     return redirect('post', thread_id=thread_id)
