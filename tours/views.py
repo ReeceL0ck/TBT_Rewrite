@@ -1,11 +1,11 @@
 from cmath import log
-from django.shortcuts import render, get_list_or_404, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponseRedirect
-from .models import BikeRoute, Booking, Tour, Gallery, Forum
-from .forms import ForumForm, GalleryForm, TourForm, BikeRouteForm, BookingForm
+from .models import BikeRoute, Booking, Tour, Gallery, Forum, Reply
+from .forms import ForumForm, GalleryForm, TourForm, BikeRouteForm, BookingForm, ReplyForm
 from django.contrib.auth.decorators import login_required
 from .utils import handle_uploaded_file
-
+from django.views.decorators.http import require_POST
 
 """
 This section deals with the static loaded pages.
@@ -187,16 +187,53 @@ def forum(request):
     return render(request, 'forum.html', context)
 
 @login_required(login_url='/login/')
+@require_POST
 def del_post(request, post_id):
+
+    print(post_id)
     post = get_object_or_404(Forum, id=post_id)
+
+    print(request.user, type(request.user))
+    print(post.poster, type(post.poster))
+    print("match:", request.user == post.poster)
     # Double-check on the server — never trust the template alone
     if request.user == post.poster:
         post.delete()
 
-    return redirect('your_posts_view_name')
+    return redirect('forum')
 
 
 @login_required(login_url='/login/')
 def post(request, thread_id):
     post = get_object_or_404(Forum, id=thread_id)
-    return render(request, 'post.html', {'post': post})
+    replies = Reply.objects.filter(post=post)
+    
+    if request.method == 'POST':
+        form = ReplyForm(request.POST)
+        if form.is_valid():
+            Reply.objects.create(
+                post=post,
+                reply_text=form.cleaned_data['reply_text'],
+                reply_user=request.user
+            )
+            return redirect('post', thread_id=thread_id)
+    else:
+        form = ReplyForm()
+    
+    context = {
+        'post': post,
+        'replies': replies,
+        'reply_form': form
+    }
+    return render(request, 'post.html', context)
+
+@login_required(login_url='/login/')
+@require_POST
+def del_reply(request, reply_id):
+    reply = get_object_or_404(Reply, id=reply_id)
+    thread_id = reply.post.id
+    
+    if request.user == reply.reply_user:
+        reply.delete()
+    
+    return redirect('post', thread_id=thread_id)

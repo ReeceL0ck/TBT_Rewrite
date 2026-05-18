@@ -64,7 +64,13 @@ class Gallery(models.Model):
 class Forum(models.Model):
     post = models.TextField()
     poster = models.ForeignKey(User, on_delete=models.CASCADE)
-    time_posted = models.DateField(default=datetime.datetime.now())
+    time_posted = models.DateTimeField(default=datetime.datetime.now)
 
     def __str__(self):
         return self.post
+
+class Reply(models.Model):
+    post = models.ForeignKey(Forum, on_delete=models.CASCADE)
+    reply_text  = models.TextField()
+    reply_user = models.ForeignKey(User, on_delete=models.CASCADE)
+    time_posted = models.DateTimeField(default=datetime.datetime.now)

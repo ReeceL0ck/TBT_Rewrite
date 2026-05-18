@@ -1,6 +1,6 @@
 from ast import For
 from sqlite3 import Date
-from tours.models import Tour, Booking, BikeRoute, Gallery, Forum
+from tours.models import Tour, Booking, BikeRoute, Gallery, Forum, Reply
 from datetime import date
 from django import forms
 
@@ -41,3 +41,11 @@ class ForumForm(forms.ModelForm):
     class Meta:
         model = Forum
         fields = ['post']
+
+class ReplyForm(forms.ModelForm):
+    class Meta:
+        model = Reply
+        fields = ['reply_text']
+        widgets = {
+            'reply_text': forms.Textarea(attrs={'rows': 4, 'placeholder': 'Write your reply...'})
+        }

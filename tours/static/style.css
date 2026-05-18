@@ -297,6 +297,57 @@ h1 {
   box-sizing: border-box;
 }
 
+/* Forum and Post Styles */
+.post-container {
+  max-width: 720px;
+  overflow: auto;
+  margin: 0 auto;
+}
+
+.delete-btn {
+  background-color: #dc3545;
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.delete-btn:hover {
+  background-color: #c82333;
+}
+
+.replies-container {
+  max-width: 720px;
+  margin: 20px auto 0 auto;
+}
+
+.reply-item {
+  background-color: #f5f5f5;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+}
+
+.reply-timestamp {
+  font-size: 0.9em;
+  color: #666;
+}
+
+.delete-form {
+  display: inline;
+}
+
+.section-heading {
+  text-align: left;
+}
+
+.post-link {
+  text-decoration: none;
+  color: inherit;
+}
+
 
 .form-container form {
     max-width: 480px;
