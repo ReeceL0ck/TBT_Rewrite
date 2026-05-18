@@ -1,4 +1,5 @@
 from cmath import log
+from django.contrib.auth.signals import user_logged_in
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponseRedirect
 from .models import BikeRoute, Booking, Tour, Gallery, Forum, Reply
@@ -106,6 +107,7 @@ def new_tour(request):
             )
             tour.tour_routes.set(form.cleaned_data['tour_routes'])
             tour.tour_bookings.set(form.cleaned_data['tour_bookings'])
+            tour.user = request.user
             return redirect('tours')
     else:
         form = TourForm()
@@ -125,6 +127,7 @@ def new_route(request):
                 route_name=form.cleaned_data['route_name'],
                 route_distance=form.cleaned_data['route_distance'],
                 route_link=form.cleaned_data['route_link'],
+                user=request.user,
             )
             return redirect('bikeroutes')
     else:
@@ -145,6 +148,7 @@ def new_booking(request):
                 booking_name=form.cleaned_data['booking_name'],
                 booking_cost=form.cleaned_data['booking_cost'],
                 booking_date=form.cleaned_data['booking_date'],
+                user=request.user,
             )
             return redirect('bookings')
     else:
@@ -161,11 +165,8 @@ def new_photo(request):
     if request.method == 'POST':
         form = GalleryForm(request.POST, request.FILES)
         if form.is_valid():
-            f = (request.FILES)
-            # print(f.photo.name)
+            form.instance.user = request.user
             form.save()
-            # print(f.read())
-            # handle_uploaded_file(request.FILES['file'])
             return redirect('gallery')
     else:
         form = GalleryForm()
@@ -202,14 +203,11 @@ def forum(request):
 @login_required(login_url='/login/')
 @require_POST
 def del_post(request, post_id):
-
-    print(post_id)
+    """
+    Endpoint: /forum/<int:post_id>/delete/
+    Description: Delete a forum post if the requesting user is the poster.
+    """
     post = get_object_or_404(Forum, id=post_id)
-
-    print(request.user, type(request.user))
-    print(post.poster, type(post.poster))
-    print("match:", request.user == post.poster)
-    # Double-check on the server — never trust the template alone
     if request.user == post.poster:
         post.delete()
 
@@ -218,6 +216,10 @@ def del_post(request, post_id):
 
 @login_required(login_url='/login/')
 def post(request, thread_id):
+    """
+    Endpoint: /forum/<int:thread_id>/
+    Description: Display a forum thread and handle adding replies.
+    """
     post = get_object_or_404(Forum, id=thread_id)
     replies = Reply.objects.filter(post=post)
 
@@ -243,6 +245,10 @@ def post(request, thread_id):
 @login_required(login_url='/login/')
 @require_POST
 def del_reply(request, reply_id):
+    """
+    Endpoint: /forum/reply/<int:reply_id>/delete/
+    Description: Delete a reply if the requesting user is the reply owner.
+    """
     reply = get_object_or_404(Reply, id=reply_id)
     thread_id = reply.post.id
 

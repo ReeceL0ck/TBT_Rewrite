@@ -28,8 +28,8 @@ class Booking(models.Model):
     booking_date = models.DateField()
     booking_cost = models.DecimalField(max_digits=10, decimal_places=2)
     user = models.ForeignKey(
-        User, on_delete=models.CASCADE, default=1
-    )  # Remove Default 1 once login system added
+        User, on_delete=models.CASCADE
+    )
 
     def __str__(self):
         return self.booking_name
@@ -45,8 +45,8 @@ class Tour(models.Model):
         Booking, related_name="tours", help_text="Hold alt to select multiple bookings"
     )
     user = models.ForeignKey(
-        User, on_delete=models.CASCADE, default=1
-    )  # Remove Default 1 once login system added
+        User, on_delete=models.CASCADE
+    )
 
     def __str__(self):
         return self.tour_name
@@ -55,7 +55,7 @@ class Tour(models.Model):
 class Gallery(models.Model):
     image_description = models.CharField(max_length=255)
     photo = models.ImageField(upload_to="images", storage=fs)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.image_description

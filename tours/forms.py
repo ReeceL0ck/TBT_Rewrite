@@ -1,7 +1,5 @@
-from ast import For
-from sqlite3 import Date
+
 from tours.models import Tour, Booking, BikeRoute, Gallery, Forum, Reply
-from datetime import date
 from django import forms
 
 class GalleryForm(forms.ModelForm):
